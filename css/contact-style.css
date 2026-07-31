@@ -1,0 +1,187 @@
+* {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: blanchedalmond;
+            height: 90vh;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .contact-container {
+            display: flex;
+            background: whitesmoke;
+            width: 50%;
+            padding: 10px;
+            border-radius: 5%;
+            justify-content: center;
+        }
+
+        .contact-container h1 {
+            height: fit-content;
+            font-family: sans-serif;
+            font-weight: 900;
+            font-size: xx-large;
+        }
+
+        .logo-box {
+            justify-self: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 20px;
+        }
+
+        .leftside {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 20px;
+            line-height: 50px;
+        }
+
+        .leftside h1 {
+            display: flex;
+            justify-content: center;
+            font-size: xxx-large;
+            margin-top: 10%;
+            color: #256;
+        }
+
+        .leftside h2 {
+            display: flex;
+            margin-left: 40px;
+            color: #256;
+            margin-top: 5%;
+            font-size: x-large;
+        }
+
+        .leftside p {
+            display: flex;
+            width: 500px;
+            color: #256;
+            font-family: monospace;
+            font-weight: 700;
+            font-size: 15;
+        }
+
+        .rightside {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .rightside .lbl-detail {
+            font-family: sans-serif;
+            font-size: larger;
+            font-weight: 700;
+            color: #256;
+            padding: 10px 10px 0px 0px;
+        }
+
+        .rightside input {
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            height: 40px;
+            color: black;
+            border-radius: 10px;
+            font-size: large;
+        }
+
+        .animate-textbox textarea {
+            margin-top: 10px;
+            padding: 10px;
+            color: black;
+            border-radius: 10px;
+            font-size: x-large;
+        }
+
+        .animate-textbox label {
+            font-family: sans-serif;
+            font-size: larger;
+            font-weight: 700;
+            padding: 10px 10px 0px 0px;
+        }
+
+        .animate-box {
+            width: 80%;
+            height: 60px;
+            /* background: #123fff; */
+            transition: all;
+            align-items: center;
+            transition: ease;
+            margin: auto;
+            padding: 10px;
+        }
+
+        .animate-box:hover {
+            align-items: center;
+            transition-duration: 1.5s;
+            width: 100%;
+            height: 60px;
+            /* background: #d12ff4; */
+        }
+
+        .animate-textbox {
+            display: flex;
+            flex-direction: column;
+            padding: 10px 0px;
+        }
+
+        .send {
+            display: flex;
+            margin: auto;
+            flex-direction: column;
+        }
+
+        .send #finalbtn {
+            padding: 8px;
+            height: fit-content;
+            border-radius: 10px;
+            background: blanchedalmond;
+            font-size: large;
+            transition: all;
+            transition-duration: 0.5s;
+            transition-timing-function: ease-in-out
+        }
+
+        .send #finalbtn:hover {
+            padding: 8px;
+            height: fit-content;
+            font-size: x-large;
+            color: darkslateblue;
+            cursor: pointer;
+        }
+
+        .email-info {
+            justify-content: center;
+            display: flex;
+            margin: auto;
+        }
+
+        .email-info #mail {
+            font-family: sans-serif;
+            font-weight: 700;
+            font-size: x-large;
+            padding: 0px 10px;
+        }
+
+        #subdone {
+            display: none;
+            padding: 15px 0px;
+        }
+        #Mail_Icon {
+            cursor: pointer;
+        }

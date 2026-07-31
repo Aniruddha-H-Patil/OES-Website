@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>REGISTRATION PAGE - BOSS</title>
+     <link rel="shortcut icon" href="/Assets/BOSS-LOGO2.png" type="image/x-icon">
+     <link rel="stylesheet" href="/css/form-style.css">
+</head>
+
+<body>
+     <header class="header">
+          <div id="logo">
+               <img src="/Assets/BOSS-LOGO.png" alt="BOSS-LOGO">
+          </div>
+          <div class="heading">
+               <h1>REGISTRATION FOR BOSS</h1>
+          </div>
+     </header>
+     <div class="main">
+          <div class="forma">
+               <h1>FILL THE FORM HERE</h1>
+               <div id="field-content">
+                    <form id="regform">
+                         <label class="lbl-detail" for="name">Full Name :</label>
+                         <input type="text" id="name" placeholder="Name as per Document" required>
+
+                         <label class="lbl-detail" for="phone">Mobile :</label>
+                         <input type="text" id="phone" placeholder="10-digit phone number" required>
+
+                         <label class="lbl-detail" for="Bday"> Date of Birth :</label>
+                         <input type="date" id="Bday" required>
+
+                         <label class="lbl-detail" for="gender">GENDER :</label>
+                         <select id="gender" required>
+                              <option value="-1">Select Gender</option>
+                              <option value="male">MALE</option>
+                              <option value="female">FEMALE</option>
+                              <option value="other">OTHERS</option>
+                         </select>
+
+                         <label class="lbl-detail" for="Category">Category :</label>
+                         <select id="Category" required>
+                              <option value="-1">Select Category</option>
+                              <option value="GENERAL">GENERAL</option>
+                              <option value="GEN_PwD">GEN_PwD</option>
+                              <option value="OBC">OBC</option>
+                              <option value="OBC_PwD">OBC_PwD</option>
+                              <option value="SC">SC</option>
+                              <option value="SC_PwD">SC_PwD</option>
+                              <option value="ST">ST</option>
+                              <option value="ST_PwD">ST_PwD</option>
+                              <option value="Others">Others</option>
+                         </select>
+
+                         <label class="lbl-detail" for="email"> Email :</label>
+                         <input type="email" id="email" placeholder="example@gmail.com" required>
+
+                         <div class="password-box">
+                              <label class="lbl-detail" for="pws"> Password :</label>
+                              <input type="password" id="pws" placeholder="Password" required>
+                              <span id="eye">&#128065;</span>
+                         </div>
+
+                         <!-- PHOTO CAPTURE / UPLOAD SECTION -->
+                         <div class="photo-section">
+                              <label class="lbl-detail">Candidate Photo :</label>
+
+                              <!-- Main Preview Box -->
+                              <div id="photoPreviewBox" class="photo-preview-box">
+                                   <span id="noPhotoText">No Photo Selected</span>
+                                   <img id="finalPhotoPreview" class="hidden-element" src="" alt="Candidate Photo Preview">
+                                   <video id="webcam" class="hidden-element" autoplay playsinline muted></video>
+                                   <canvas id="photoCanvas" class="hidden-element"></canvas>
+                              </div>
+
+                              <!-- Hidden File Input -->
+                              <input type="file" id="photoFile" accept="image/*" class="hidden-element">
+
+                              <!-- Primary Action Buttons -->
+                              <div class="photo-action-btns" id="mainPhotoBtns">
+                                   <button type="button" id="btnLiveCapture" class="btn-capture">📷 Live Capture</button>
+                                   <button type="button" id="btnUpload" class="btn-upload">📁 Upload</button>
+                              </div>
+
+                              <!-- Camera Controls -->
+                              <div class="photo-action-btns hidden-element" id="camControls">
+                                   <button type="button" id="btnCaptureFrame" class="btn-capture btn-click-photo">📸 Click Photo</button>
+                                   <button type="button" id="btnCancelCam" class="btn-upload btn-cancel-cam">❌ Cancel</button>
+                              </div>
+                         </div>
+
+                         <div class="final-btn">
+                              <!-- ID updated to btnReset to prevent DOM Shadowing -->
+                              <button id="btnReset" type="button">RESET</button>
+                              <button type="submit" id="sub">SUBMIT</button>
+                         </div>
+                    </form>
+               </div>
+          </div>
+     </div>
+
+     <!-- REVIEW WINDOW MODAL -->
+     <div id="reviewModal" class="review-modal-overlay hidden-element">
+          <div class="review-window">
+               <div class="review-header">
+                    <h2>CANDIDATE DATA VERIFICATION</h2>
+               </div>
+
+               <div class="review-body">
+                    <div class="review-data-card">
+                         <div>
+                              <div class="review-field-label">Candidate Name</div>
+                              <div id="revName" class="review-field-value large">-</div>
+                         </div>
+                         <div>
+                              <div class="review-field-label">Mobile / Phone</div>
+                              <div id="revMobile" class="review-field-value">-</div>
+                         </div>
+                         <div>
+                              <div class="review-field-label">Email Address</div>
+                              <div id="revEmail" class="review-field-value">-</div>
+                         </div>
+                         <div>
+                              <div class="review-field-label">Date of Birth</div>
+                              <div id="revDob" class="review-field-value">-</div>
+                         </div>
+                         <div>
+                              <div class="review-field-label">Gender</div>
+                              <div id="revGender" class="review-field-value">-</div>
+                         </div>
+                         <div>
+                              <div class="review-field-label">Category</div>
+                              <div id="revCategory" class="review-field-value">-</div>
+                         </div>
+                    </div>
+
+                    <div class="review-photo-section">
+                         <div class="review-photo-frame">
+                              <img id="revPhoto" src="" alt="Candidate Photo">
+                         </div>
+                         <span id="revPhotoBadge" class="review-photo-badge">LIVE CAPTURE</span>
+                    </div>
+               </div>
+
+               <div class="review-footer">
+                    <button type="button" id="btnEditReview" class="btn-review-back">BACK TO EDIT</button>
+                    <button type="button" id="btnConfirmSubmit" class="btn-review-submit">CONFIRM & FINAL SUBMIT</button>
+               </div>
+          </div>
+     </div>
+
+     <!-- SUCCESS MODAL / REGISTRATION SLIP -->
+     <div id="successModal" class="modal-overlay hidden-element">
+          <div class="modal-card">
+               <h2 class="modal-title">🎉 Registration Successful!</h2>
+
+               <div class="modal-photo-wrapper">
+                    <img id="slipPhoto" src="" alt="Candidate Photo" class="modal-photo">
+               </div>
+
+               <div class="modal-details">
+                    <p class="modal-field"><strong>Name:</strong> <span id="slipName" class="val-blue"></span></p>
+                    <p class="modal-field"><strong>App No:</strong> <span id="slipAppNo" class="val-amber"></span></p>
+                    <p class="modal-field"><strong>Roll No:</strong> <span id="slipRollNo" class="val-amber"></span></p>
+                    <p class="modal-field"><strong>Exam Password (DOB):</strong> <span id="slipDob" class="val-green"></span></p>
+               </div>
+
+               <p class="modal-note">Please save your Application Number and Password.</p>
+
+               <!-- ACTION BUTTONS: COPY & PRINT/PDF -->
+               <div class="slip-actions">
+                    <button type="button" id="btnCopySlip" class="btn-slip-action btn-copy">📋 Copy Details</button>
+                    <button type="button" id="btnPrintSlip" class="btn-slip-action btn-print">🖨️ Print / Save PDF</button>
+               </div>
+
+               <button id="modalProceedBtn" class="btn-proceed" style="margin-top: 10px;">PROCEED TO LOGIN (OES)</button>
+          </div>
+     </div>
+
+     <script src="/js/form-script.js"></script>
+     <script src="/js/form-auth.js"></script>
+</body>
+</html>

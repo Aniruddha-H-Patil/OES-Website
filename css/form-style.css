@@ -1,0 +1,575 @@
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+
+body {
+     background: #125;
+     background: url(/Assets/download.png) no-repeat center;
+     background-size: cover;
+     background-attachment: fixed;
+     width: 100%;
+     min-height: 100vh;
+     overflow: hidden;
+     scroll-behavior: smooth;
+     scroll-snap-type: mandatory;
+     overflow-y: auto;
+}
+
+.header {
+     display: flex;
+     flex-direction: column;
+}
+
+.heading {
+     display: flex;
+     margin: auto;
+}
+
+#logo {
+     justify-content: center;
+     padding: 10px;
+}
+
+#logo img {
+     width: 100px;
+     border-radius: 20%;
+}
+
+.heading h1 {
+     padding: 3px;
+     margin: auto;
+     font-family: monospace;
+     font-size: 50px;
+     color: aquamarine;
+}
+
+input[type=text],
+input[type=email],
+input[type=date] {
+     width: 100%;
+     padding: 12px 20px;
+     margin: 8px 0;
+     display: inline-block;
+     border: 1px solid #ccc;
+     box-sizing: border-box;
+     border-radius: 10px;
+     text-transform: uppercase;
+     height: 10%;
+     background: #456;
+     color: #fff;
+}
+
+input[type=email] {
+     text-transform: lowercase;
+}
+
+input[type=password] {
+     text-transform: none !important;
+}
+
+.password-box {
+     position: relative;
+     width: 100%;
+     margin: 8px 0;
+}
+
+.password-box input {
+     width: 100%;
+     padding: 12px 45px 12px 20px;
+     margin: 8px 0;
+     display: inline-block;
+     border: 1px solid #ccc;
+     box-sizing: border-box;
+     border-radius: 10px;
+     background: #456;
+     color: #fff;
+     font-size: 16px;
+     height: 48px;
+     text-transform: none;
+}
+
+#eye {
+     position: absolute;
+     right: 15px;
+     top: 50%;
+     transform: translateY(-50%);
+     cursor: pointer;
+     display: none;
+     font-size: 20px;
+}
+
+select {
+     background: #156;
+     color: #fff;
+     cursor: pointer;
+     width: 50%;
+     padding: 12px 20px;
+     border-radius: 10px;
+}
+
+.forma {
+     margin: auto;
+     display: flex;
+     border: 2px solid #fff;
+     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+     align-items: center;
+     justify-content: center;
+     width: 900px;
+     height: 500px;
+     border-radius: 10px 0px 0px 10px;
+     backdrop-filter: blur(10px);
+}
+
+.forma h1 {
+     padding: 15px;
+     color: #00ffff;
+     text-align: center;
+     font-family: sans-serif;
+}
+
+#field-content {
+     display: flex;
+     flex-direction: column;
+     width: 100%;
+     height: -webkit-fill-available;
+}
+
+#field-content form {
+     display: flex;
+     flex-direction: column;
+     -webkit-overflow-scrolling: touch;
+     overflow-block: scroll;
+     border-radius: 0px 10px 10px 0px;
+     padding: 10px;
+     width: auto;
+     font-family: sans-serif;
+}
+
+option {
+     background: #389;
+}
+
+.main {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     width: 100%;
+}
+
+.lbl-detail {
+     color: whitesmoke;
+     font-weight: bold;
+     font-size: x-large;
+     padding: 10px;
+}
+
+.final-btn {
+     display: flex;
+     padding: 10px;
+     cursor: pointer;
+}
+
+.final-btn #btnReset,
+.final-btn #sub {
+     margin-right: 10px;
+     width: 50%;
+     padding: 20px;
+     height: fit-content;
+     border-radius: 10px;
+     background: #707070;
+     font-size: large;
+     color: #fff;
+     border: none;
+     cursor: pointer;
+     transition: all 0.5s ease-in-out;
+}
+
+.final-btn #sub:hover {
+     background-color: #10b110;
+}
+
+.final-btn #btnReset:hover {
+     background-color: #ff0000;
+}
+
+/* --- PHOTO SECTION UI --- */
+.photo-section {
+    margin: 15px 0;
+    width: 100%;
+}
+
+.photo-preview-box {
+    width: 50%;
+    height: 220px;
+    background: #97afd1;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 12px;
+    border: 2px dashed #00ffff;
+}
+
+#noPhotoText {
+    color: #2b4566;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+#finalPhotoPreview, #webcam {
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important;
+    object-position: center center !important;
+    transform: scaleX(-1);
+}
+
+#finalPhotoPreview {
+    transform: none !important;
+}
+
+.photo-action-btns {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.btn-capture {
+    flex: 1;
+    background: #1f3653;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s opacity;
+}
+
+.btn-upload {
+    flex: 1;
+    background: #10b981;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s opacity;
+}
+
+.btn-capture:hover, .btn-upload:hover {
+    opacity: 0.85;
+}
+
+/* Custom classes replacing inline style rules */
+.hidden-element {
+    display: none !important;
+}
+
+.btn-click-photo {
+    background: #eab308 !important;
+}
+
+.btn-cancel-cam {
+    background: #ef4444 !important;
+}
+
+/* --- SUCCESS MODAL & REGISTRATION SLIP STYLES --- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-card {
+    background: #1e293b;
+    color: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    border: 1px solid #3b82f6;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.modal-title {
+    color: #22c55e;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.modal-photo-wrapper {
+    margin-bottom: 15px;
+}
+
+.modal-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #3b82f6;
+    margin: 0 auto 10px;
+    display: block;
+}
+
+.modal-details {
+    text-align: left;
+    background: #0f172a;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.modal-field {
+    margin: 5px 0;
+}
+
+.val-blue {
+    color: #60a5fa;
+    font-weight: 600;
+}
+
+.val-amber {
+    color: #f59e0b;
+    font-weight: bold;
+}
+
+.val-green {
+    color: #34d399;
+    font-weight: 600;
+}
+
+.modal-note {
+    font-size: 12px;
+    color: #94a3b8;
+    margin: 12px 0;
+}
+
+/* --- NEW: SLIP ACTION BUTTONS (COPY & PRINT) --- */
+.slip-actions {
+    display: flex;
+    gap: 12px;
+    margin: 15px 0;
+    justify-content: center;
+}
+
+.btn-slip-action {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #ffffff;
+    transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.btn-slip-action:hover {
+    opacity: 0.85;
+}
+
+.btn-slip-action:active {
+    transform: scale(0.95);
+}
+
+.btn-copy {
+    background: #475569;
+}
+
+.btn-print {
+    background: #0d9488;
+}
+
+/* --- END NEW --- */
+
+.btn-proceed {
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 15px;
+    transition: background 0.2s ease;
+}
+
+.btn-proceed:hover {
+    background: #1d4ed8;
+}
+
+/* --- REVIEW WINDOW MODAL --- */
+.review-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+}
+
+.review-window {
+    width: 720px;
+    max-width: 92vw;
+    background: #1b2028;
+    border-radius: 8px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    border: 1px solid #2d3542;
+}
+
+.review-header {
+    background: #1e3a5f;
+    text-align: center;
+    padding: 14px 0;
+    border-bottom: 1px solid #2b4c7e;
+}
+
+.review-header h2 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.review-body {
+    padding: 24px;
+    display: flex;
+    gap: 20px;
+}
+
+.review-data-card {
+    flex: 1;
+    background: #232a35;
+    border: 1px solid #323d4e;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.review-field-label {
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+}
+
+.review-field-value {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.review-field-value.large {
+    font-size: 18px;
+}
+
+.review-photo-section {
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    padding-top: 5px;
+}
+
+.review-photo-frame {
+    width: 160px;
+    height: 190px;
+    border: 2px solid #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.review-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.review-photo-badge {
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.review-footer {
+    padding: 16px 24px 24px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1b2028;
+}
+
+.btn-review-back {
+    background: #8592a6;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.btn-review-back:hover {
+    background: #6c788a;
+}
+
+.btn-review-back:active {
+    transform: scale(0.98);
+}
+
+.btn-review-submit {
+    background: #059669;
+    color: #ffffff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.btn-review-submit:hover {
+    background: #047857;
+}
+
+.btn-review-submit:active {
+    transform: scale(0.98);
+}

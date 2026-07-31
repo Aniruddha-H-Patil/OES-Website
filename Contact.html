@@ -1,0 +1,68 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTACT - BOSS</title>
+    <link rel="shortcut icon" href="/Assets/BOSS-LOGO.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/contact-style.css">
+</head>
+
+<body>
+    <div class="contact-container">
+        <div class="leftside">
+            <div class="logo-box">
+                <img id="logo" src="/Assets/BOSS-LOGO.png" alt="">
+            </div>
+            <h1>CONTACT US</h1>
+            <h2>I'd like to hear from you!</h2>
+            <p>If you have any inquiries or just want to say hi, Please use the contact form! or mail us &dArr;</p>
+
+            <div class="email-info">
+                <label for="mail">
+                    <img id="Mail_Icon" src="/Assets/mail.png" alt="Mail_Icon">
+                </label>
+                <a id="mail" href="https://mail.google.com/mail/?ogbl#inbox?compose=new">ahp.bombay@gmail.com</a>
+            </div>
+            <hr>
+            <div id="icon-ref">
+                <a target="_blank" href="https://icons8.com/icon/OumT4lIcOllS/mail">Mail</a> icon by <a target="_blank"
+                    href="https://icons8.com">Icons8</a>
+
+            </div>
+        </div>
+        <div class="rightside">
+
+            <!-- NAME -->
+            <div class="animate-box">
+                <label class="lbl-detail" for="name">NAME :</label>
+                <input type="text" placeholder="NAME" name="name" id="name" required>
+            </div>
+
+            <div class="animate-box">
+                <!-- PHONE -->
+                <label class="lbl-detail" for="phone">PHONE :</label>
+                <input type="phone" placeholder="PHONE" name="phone" id="phone" required>
+            </div>
+
+            <div class="animate-box">
+                <!-- EMAIL -->
+                <label class="lbl-detail" for="email">EMAIL :</label>
+                <input type="email" placeholder="EMAIL" name="email" id="email" required>
+            </div>
+
+            <div class="animate-textbox">
+                <!-- MESSAGE -->
+                <label class="lbl-msg" for="msg">Message :</label>
+                <textarea name="meg" id="msg" cols="30" rows="10" placeholder="ENTER MESSAGE"></textarea>
+            </div>
+            <div class="send">
+                <button id="finalbtn" onclick="sub()" type="submit">SEND</button>
+                <span id="subdone">Thanks for sharing your Thoughts with Us!</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/contact-script.js"></script>
+</body>
+</html>
