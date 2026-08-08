@@ -167,7 +167,7 @@ if (btnConfirmSubmit) {
             pendingFormData.photo_base64 = photoBase64;
 
             // Backend API hit
-            const response = await fetch('${API_BASE_URL}/api/register', {
+            const response = await fetch(`${API_BASE_URL}/api/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
