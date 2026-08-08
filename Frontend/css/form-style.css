@@ -6,7 +6,7 @@
 
 body {
      background: #125;
-     background: url(/Assets/download.png) no-repeat center;
+     background: url(/assets/download.png) no-repeat center;
      background-size: cover;
      background-attachment: fixed;
      width: 100%;

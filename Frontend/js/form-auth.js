@@ -183,7 +183,7 @@ if (btnConfirmSubmit) {
                 // Slip/Modal field populations
                 const slipPhoto = document.getElementById('slipPhoto');
                 if (slipPhoto) {
-                    slipPhoto.src = result.photo_link || (pendingFileToUpload ? URL.createObjectURL(pendingFileToUpload) : 'Assets/default-avatar.png');
+                    slipPhoto.src = result.photo_link || (pendingFileToUpload ? URL.createObjectURL(pendingFileToUpload) : '/Frontend/assets/default-avatar.png');
                 }
                 if (document.getElementById('slipName')) document.getElementById('slipName').innerText = pendingFormData.name;
                 if (document.getElementById('slipAppNo')) document.getElementById('slipAppNo').innerText = pendingFormData.app_no;
