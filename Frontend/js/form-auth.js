@@ -1,6 +1,10 @@
 // Strict wrapper taaki global context crash na ho
 const registrationForm = document.getElementById('regform');
-const API_BASE_URL = 'https://oes-website.onrender.com';
+
+// AUTOMATIC ENVIRONMENT SWITCHING (Localhost par local server, Vercel par Render server)
+const API_BASE_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'http://localhost:3000'
+    : 'https://oes-website.onrender.com';
 
 // Helper function: Blob/File ko Base64 string mein convert karne ke liye
 function blobToBase64(blob) {
@@ -166,7 +170,7 @@ if (btnConfirmSubmit) {
             const photoBase64 = await blobToBase64(pendingFileToUpload);
             pendingFormData.photo_base64 = photoBase64;
 
-            // Backend API hit
+            // Dynamic API Endpoint
             const response = await fetch(`${API_BASE_URL}/api/register`, {
                 method: 'POST',
                 headers: {
@@ -184,7 +188,7 @@ if (btnConfirmSubmit) {
                 // Slip/Modal field populations
                 const slipPhoto = document.getElementById('slipPhoto');
                 if (slipPhoto) {
-                    slipPhoto.src = result.photo_link || (pendingFileToUpload ? URL.createObjectURL(pendingFileToUpload) : '/Frontend/assets/default-avatar.png');
+                    slipPhoto.src = result.photo_link || (pendingFileToUpload ? URL.createObjectURL(pendingFileToUpload) : '/assets/default-avatar.png');
                 }
                 if (document.getElementById('slipName')) document.getElementById('slipName').innerText = pendingFormData.name;
                 if (document.getElementById('slipAppNo')) document.getElementById('slipAppNo').innerText = pendingFormData.app_no;
@@ -214,6 +218,11 @@ if (btnConfirmSubmit) {
 
                 if (subBtn) subBtn.innerText = "SUBMIT";
 
+                // Target Redirect URL (Clean Vercel/Local compatibility)
+                const targetRedirect = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+                    ? '/OES'
+                    : '/OES.html';
+
                 // Success Modal Display & Redirect Event Binding
                 const successModal = document.getElementById('successModal');
                 if (successModal) {
@@ -223,12 +232,12 @@ if (btnConfirmSubmit) {
                     const proceedBtn = document.getElementById('modalProceedBtn');
                     if (proceedBtn) {
                         proceedBtn.onclick = function () {
-                            window.location.href = "/OES";
+                            window.location.href = targetRedirect;
                         };
                     }
                 } else {
                     alert(`🎉 Registration Successful!\n\nApplication No: ${pendingFormData?.app_no}\nRoll No: ${pendingFormData?.roll_no}`);
-                    window.location.href = "/OES";
+                    window.location.href = targetRedirect;
                 }
             } else {
                 alert("Database Insertion Error: " + (result.error || result.message || "Unknown server error"));
@@ -241,9 +250,13 @@ if (btnConfirmSubmit) {
             btnConfirmSubmit.disabled = false;
             if (subBtn) subBtn.innerText = "SUBMIT";
 
+            const fallbackRedirect = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+                ? '/OES'
+                : '/OES.html';
+
             if (fetchSuccessful) {
                 console.error("Local UI Script Error Post-Submit:", error);
-                window.location.href = "/OES";
+                window.location.href = fallbackRedirect;
             } else {
                 console.error("Server Connection Failure:", error);
                 alert("Backend server se connection fail ho gaya! Check kar ki server running hai.");

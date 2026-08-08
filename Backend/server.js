@@ -1,7 +1,6 @@
 // Root directory se .env load karne ke liye path
 require('dotenv').config({ path: require('path').join(__dirname, '.env') });
 const express = require('express');
-const path = require('path');
 const helmet = require('helmet');
 const cors = require('cors');
 
@@ -11,9 +10,6 @@ const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-// Path to Frontend folder (Backend ke ek level upar)
-const FRONTEND_PATH = path.join(__dirname, '../Frontend');
 
 // ENVIRONMENT CHECK
 const envMode = process.env.NODE_ENV || 'development';
@@ -57,22 +53,44 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 // 4. INITIALIZE DB SCHEMA
 initDB();
 
-// 5. STATIC FILES (Frontend ke saare folders - css, js, assets, etc. Auto-Serve honge)
-app.use('/', express.static(FRONTEND_PATH));
-app.use(express.static(FRONTEND_PATH));
+// 5. LOCAL DEV STATIC SERVING vs PROD HEALTH CHECK
+if (!IS_PROD) {
+  // Local environment mein Express hi HTML/CSS serve karega
+  const path = require('path');
+  const FRONTEND_PATH = path.join(__dirname, '../Frontend');
 
-// 6. VIEW ROUTES
-app.get(['/', '/OES'], (req, res) => res.sendFile(path.join(FRONTEND_PATH, 'OES.html')));
-app.get('/form', (req, res) => res.sendFile(path.join(FRONTEND_PATH, 'form.html')));
-app.get('/Contact', (req, res) => res.sendFile(path.join(FRONTEND_PATH, 'Contact.html')));
+  app.use(express.static(FRONTEND_PATH));
+  app.get(['/', '/OES'], (req, res) => res.sendFile(path.join(FRONTEND_PATH, 'OES.html')));
+  app.get('/form', (req, res) => res.sendFile(path.join(FRONTEND_PATH, 'form.html')));
+  app.get('/Contact', (req, res) => res.sendFile(path.join(FRONTEND_PATH, 'Contact.html')));
+} else {
+  // Production (Render) par backend pure API server ki tarah chalega
+  app.get('/', (req, res) => {
+    res.status(200).json({
+      success: true,
+      message: "OES Backend API Server is Live & Running!"
+    });
+  });
+}
 
-// 7. API ROUTES
+// 6. API ROUTES
 app.use('/api', authRoutes);
 
-// 8. 404 FALLBACK
-app.use((req, res) => res.status(404).sendFile(path.join(FRONTEND_PATH, '404.html')));
+// 7. 404 FALLBACK
+app.use((req, res) => {
+  if (!IS_PROD) {
+    const path = require('path');
+    const FRONTEND_PATH = path.join(__dirname, '../Frontend');
+    return res.status(404).sendFile(path.join(FRONTEND_PATH, '404.html'));
+  }
+  
+  res.status(404).json({
+    success: false,
+    message: "API Endpoint Not Found"
+  });
+});
 
-// 9. CENTRALIZED GLOBAL ERROR HANDLER
+// 8. CENTRALIZED GLOBAL ERROR HANDLER
 app.use((err, req, res, next) => {
   console.error(`[ERROR]: ${err.stack || err.message}`);
   res.status(err.status || 500).json({
@@ -83,5 +101,5 @@ app.use((err, req, res, next) => {
 
 // SERVER START
 app.listen(PORT, () => {
-  console.log(`🚀 Registration Web Portal Running in [${envMode.toUpperCase()}] mode on http://localhost:${PORT}`);
+  console.log(`🚀 OES Backend Server Running in [${envMode.toUpperCase()}] mode on port ${PORT}`);
 });
