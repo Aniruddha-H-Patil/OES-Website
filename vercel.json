@@ -7,6 +7,7 @@
     }
   ],
   "routes": [
+    { "src": "/", "dest": "/Frontend/OES.html" },
     { "src": "/OES", "dest": "/Frontend/OES.html" },
     { "src": "/form", "dest": "/Frontend/form.html" },
     { "src": "/Contact", "dest": "/Frontend/Contact.html" },
