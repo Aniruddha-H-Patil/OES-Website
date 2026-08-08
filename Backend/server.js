@@ -25,7 +25,7 @@ app.set('trust proxy', 1);
 // 2. SECURITY & DYNAMIC CORS
 app.use(helmet({ contentSecurityPolicy: false }));
 
-// Allowed origins array (Local testing ports ALWAYS allowed)
+// Allowed origins array (Local ports ALWAYS allowed)
 const allowedOrigins = [
   'http://localhost:3000',
   'http://127.0.0.1:3000',
@@ -33,18 +33,18 @@ const allowedOrigins = [
   'http://127.0.0.1:5500'
 ];
 
-// Jab live domain ready hoga, tab .env se CLIENT_URL padh lega
+// Env se CLIENT_URL padhega (comma-separated URLs allowed)
 if (process.env.CLIENT_URL) {
-  allowedOrigins.push(process.env.CLIENT_URL);
+  const clientUrls = process.env.CLIENT_URL.split(',').map(url => url.trim());
+  allowedOrigins.push(...clientUrls);
 }
 
 app.use(cors({
   origin: (origin, callback) => {
-    // !origin matlab same-origin request ya Postman/cURL, usko bhi allow karo
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error('CORS policy violation: Origin not allowed'));
+      callback(new Error(`CORS policy violation: Origin [${origin}] not allowed`));
     }
   },
   credentials: true
