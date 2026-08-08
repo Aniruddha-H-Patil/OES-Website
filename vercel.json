@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "Frontend/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    { "src": "/OES", "dest": "/Frontend/OES.html" },
+    { "src": "/form", "dest": "/Frontend/form.html" },
+    { "src": "/Contact", "dest": "/Frontend/Contact.html" },
+    { "src": "/(.*)", "dest": "/Frontend/$1" }
+  ]
+}
