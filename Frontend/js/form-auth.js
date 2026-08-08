@@ -1,5 +1,6 @@
 // Strict wrapper taaki global context crash na ho
 const registrationForm = document.getElementById('regform');
+const API_BASE_URL = 'https://oes-website.onrender.com';
 
 // Helper function: Blob/File ko Base64 string mein convert karne ke liye
 function blobToBase64(blob) {
@@ -166,7 +167,7 @@ if (btnConfirmSubmit) {
             pendingFormData.photo_base64 = photoBase64;
 
             // Backend API hit
-            const response = await fetch('/api/register', {
+            const response = await fetch('${API_BASE_URL}/api/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
