@@ -100,7 +100,7 @@ const loginUser = async (req, res) => {
         if (userResult.rows.length === 0) {
             return res.status(404).json({ 
                 success: false, 
-                error: "Galat Application Number!" 
+                error: "Invalid Application Number!" 
             });
         }
 
@@ -113,7 +113,7 @@ const loginUser = async (req, res) => {
         if (!isPasswordValid && !isExamPasswordValid) {
             return res.status(401).json({ 
                 success: false, 
-                error: "Galat Password!" 
+                error: "Invalid Password!" 
             });
         }
 
