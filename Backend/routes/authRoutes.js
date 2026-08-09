@@ -10,7 +10,10 @@ const apiLimiter = rateLimit({
     message: { success: false, error: "Bhai bohot zyada requests bhej rahe ho, thoda ruko!" }
 });
 
-// Endpoint Mapping: POST /api/register
+// Endpoint Mapping: POST /api/auth/register (Web Website se aayega)
 router.post('/register', apiLimiter, registerUser);
+
+// 2. Endpoint Mapping: POST /api/auth/login (Desktop WinUI 3 App se aayega)
+router.post('/login', apiLimiter, loginUser);
 
 module.exports = router;
