@@ -81,7 +81,6 @@ const registerUser = async (req, res) => {
 // 2. LOGIN API (DESKTOP APP ONLY)
 // ==========================================
 const loginUser = async (req, res) => {
-    // App direct payload me exact hardware metrics bhejega
     const { app_no, password, mac_address, local_ip, hostname } = req.body;
 
     if (!app_no || !password) {
@@ -94,7 +93,7 @@ const loginUser = async (req, res) => {
     try {
         const cleanAppNo = app_no.trim();
 
-        // Query Strictly by Application Number
+        // 1. Fetch User Record
         const userQuery = `SELECT * FROM users WHERE app_no = $1`;
         const userResult = await pool.query(userQuery, [cleanAppNo]);
 
@@ -107,7 +106,7 @@ const loginUser = async (req, res) => {
 
         const user = userResult.rows[0];
 
-        // Verify Password (Account Password Hash OR Exam Password)
+        // 2. Password Check (Regular Hash OR Exam Password)
         const isPasswordValid = await bcrypt.compare(password, user.password);
         const isExamPasswordValid = user.exam_password && (user.exam_password === password);
 
@@ -118,13 +117,13 @@ const loginUser = async (req, res) => {
             });
         }
 
-        // Processing App Payload for Hardware Specs
+        // 3. Hardware Tracking Prep
         const sysHost = hostname || "Desktop-PC";
         const sysIp = local_ip || req.socket.remoteAddress || "127.0.0.1";
         const sysMac = mac_address || user.mac_address || null;
         const deviceInfoString = `[Desktop App] Host: ${sysHost} | IP: ${sysIp}`;
 
-        // Login ke waqt saari Hardware Details Update hongi
+        // 4. Update PC Session & Hardware Tracking in DB
         await pool.query(
             `UPDATE users SET 
                 is_active = TRUE, 
@@ -136,24 +135,15 @@ const loginUser = async (req, res) => {
             [sysMac, sysIp, deviceInfoString, user.app_no]
         );
 
-        // Sensitive Fields Cleanup
-        delete user.password;
-        delete user.exam_password;
-
+        // 5. Final Response Object
         return res.status(200).json({
             success: true,
-            message: "Authentication successful!",
+            message: "Login successful!",
             candidate: {
                 app_no: user.app_no,
                 roll_no: user.roll_no,
                 name: user.name,
-                personal_email: user.personal_email,
-                gender: user.gender,
-                category: user.category,
-                dob: user.dob,
                 photo_link: user.photo_link,
-                exam_status: user.exam_status,
-                score: user.score,
                 is_active: true
             }
         });
